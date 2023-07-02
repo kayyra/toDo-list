@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header{
+    color: #ffff;
+    background: #333;
+    height: 10rem;
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+button{
+   margin: 6px;
+    background: #126df1;    
+    color: #ffff;
+    font-size: 16px;
+}
+
+input, label{
+    margin-bottom: 2rem;
+    margin-left: 7rem;
+}
+
