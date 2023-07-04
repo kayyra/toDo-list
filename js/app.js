@@ -1,51 +1,104 @@
-let tasksList = [];
-let addTasks = [];
+let tasks = [];
 
 
-function addTasks() {
-    let tasks = document.getElementById("tasks").value
-    tasksList.push(tasks);
+function addTask() {
+ let taskInput = document.getElementById("taskInput");
+ let taskList = document.getElementById("taskList");
 
-    showTasks();
-    modifyTasks();
-    deleteTasks();
-    cleanWindow();
+
+ let taskText = taskInput.value;
+
+  if (taskText !== "") {
+   
+    tasks.push(taskText);
+
+ let taskItem = document.createElement("li");
+    taskItem.textContent = taskText;
+
+
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar";
+    deleteButton.onclick = function() {
+      deleteTask(taskText);
+    };
+    taskItem.appendChild(deleteButton);
+
+
+  let editButton = document.createElement("button");
+    editButton.textContent = "Editar";
+    editButton.onclick = function() {
+      editTask(taskText);
+    };
+    taskItem.appendChild(editButton);
+
+    taskList.appendChild(taskItem);
+
+   
+    taskInput.value = "";
+  }
 }
 
-function showTasks(){
-    let tasksListHTML = document.getElementById("tasksList");
-    tasksListHTML.innerHTML = "";
 
-    
+function deleteTask(task) {
+  let index = tasks.indexOf(task);
 
-    for (let i = 0; i < tasksList.length; i++) {
-        let tasks = tasksList[i];
-        let tasksHTML = "<li>" + tasks + "<button onclick='deleteTasks(" + i + ")'>Delete</button></li>";
-        listHTML.innerHTML += listHTMLL;
-    }
+  if (index !== -1) {
 
-}
-
-function modifyTasks(){
-    for (let i = 0 ; i < tasksList.length; i++) {
-        let tasks = tasksList[i];
-        let tasksHTML = "<li>" + tasks + "<button onclick='modifyTasks(" + i +")'>Modify</button></li>";
-        tasksListHTML.innerHTML += listHTML;
-    }
-}
+    tasks.splice(index, 1);
 
   
+    let taskList = document.getElementById("taskList");
+    taskList.removeChild(taskList.childNodes[index]);
 
-function modifyTasks(index){
-    tasksList.splice(index, 1);
-    modifyTasks();
+    updateTaskList();
+  }
 }
 
-function deleteTasks(index) {
-    tasksList.splice(index, 1);
-    showTasks();
+
+function editTask(task) {
+  let index = tasks.indexOf(task);
+
+  if (index !== -1) {
+
+    let newTaskText = prompt("Editar tarea:", task);
+
+    if (newTaskText !== null && newTaskText !== "") {
+
+      tasks[index] = newTaskText;
+
+      let taskList = document.getElementById("taskList");
+      let taskItem = taskList.childNodes[index];
+      taskItem.textContent = newTaskText;
+
+
+      updateTaskList();
+    }
+  }
 }
 
-function cleanWindow() {
-    document.getElementById("tasks").value = "";
+
+function updateTaskList() {
+  let taskList = document.getElementById("taskList");
+  taskList.innerHTML = "";
+
+  for (let i = 0; i < tasks.length; i++) {
+   let taskText = tasks[i];
+
+    let taskItem = document.createElement("li");
+    taskItem.textContent = taskText;
+
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Eliminar";
+    deleteButton.onclick = function() {
+      deleteTask(taskText);
+    };
+    taskItem.appendChild(deleteButton);
+
+    let editButton = document.createElement("button");
+    editButton.textContent = "Editar";
+    editButton.onclick = function() {
+      editTask(taskText);
+    };
+    tasks
+  }
 }

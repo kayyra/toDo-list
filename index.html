@@ -13,14 +13,11 @@
         <h1>Simple TODO List</h1>
     </header>
     <main>
-        <form>
-            <label for="tasks">New Task:</label>
-            <input type="text" id="tasks" required>         
-            <button type="button" id="addTasks">AddTask</button>
-        </form>
+        <h2>Nueva Tarea</h2>
+        <input type="text" id="taskInput">
+        <button onclick="addTask()">Agregar</button>
 
-        <h2>Tasks ToDo:</h2>
-        <ul id="tasksList"></ul>
+        <ul id="taskList"></ul>
     </main>
 
 
